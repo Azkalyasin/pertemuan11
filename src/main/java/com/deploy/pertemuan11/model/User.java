@@ -1,15 +1,24 @@
 package com.deploy.pertemuan11.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@Builder
 @Table(name = "users")
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
+
+    private String username;
+    private String password;
+    
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Profil profile;
 }
